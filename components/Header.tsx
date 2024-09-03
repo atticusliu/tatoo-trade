@@ -1,44 +1,29 @@
-import NextLogo from "./NextLogo";
-import SupabaseLogo from "./SupabaseLogo";
+
+import Image from "next/image";
+import Link from "next/link";
+import AuthButton from "./AuthButton";
 
 export default function Header() {
   return (
-    <div className="flex flex-col gap-16 items-center">
-      <div className="flex gap-8 justify-center items-center">
-        <a
-          href="https://supabase.com/?utm_source=create-next-app&utm_medium=template&utm_term=nextjs"
-          target="_blank"
-          rel="noreferrer"
-        >
-          <SupabaseLogo />
-        </a>
-        <span className="border-l rotate-45 h-6" />
-        <a href="https://nextjs.org/" target="_blank" rel="noreferrer">
-          <NextLogo />
-        </a>
+    <header className="pb-4 top-0 z-50">
+      <div className="px-4 flex justify-between">
+        <Link href="/" className="hover:text-gray-300">
+          <Image src='/tatttootrade_logo-01.png' width={125} height={25} alt='Go to the homepage' />
+        </Link>
+        <nav className="flex items-center">
+          <ul className="flex gap-x-6">
+            <li>
+              <Link href="/about" className="hover:text-gray-300">
+                About
+              </Link>
+            </li>
+            <li>
+              <AuthButton />
+            </li>
+          </ul>
+        </nav>
       </div>
-      <h1 className="sr-only">Supabase and Next.js Starter Template</h1>
-      <p className="text-3xl lg:text-4xl !leading-tight mx-auto max-w-xl text-center">
-        The fastest way to build apps with{" "}
-        <a
-          href="https://supabase.com/?utm_source=create-next-app&utm_medium=template&utm_term=nextjs"
-          target="_blank"
-          className="font-bold hover:underline"
-          rel="noreferrer"
-        >
-          Supabase
-        </a>{" "}
-        and{" "}
-        <a
-          href="https://nextjs.org/"
-          target="_blank"
-          className="font-bold hover:underline"
-          rel="noreferrer"
-        >
-          Next.js
-        </a>
-      </p>
-      <div className="w-full p-[1px] bg-gradient-to-r from-transparent via-foreground/10 to-transparent my-8" />
-    </div>
+      <div className="flex-grow border-t border-gray-200"></div>
+    </header>
   );
 }
