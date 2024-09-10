@@ -1,3 +1,5 @@
+"use client"
+
 import { useState, ChangeEvent, FormEvent } from "react";
 import CreateProductButton from "@/components/CreateProductButton";
 
@@ -49,8 +51,48 @@ export default function CreateProduct() {
     }
   };
 
+  const validate = () => {
+    if (productFormData.title === "") {
+      console.error("Title is required");
+      return false;
+    }
+
+    if (productFormData.description === "") {
+      console.error("Description is required");
+      return false;
+    }
+
+    if (productFormData.category === "") {
+      console.error("Category is required");
+      return false;
+    }
+
+    if (productFormData.price === 0.00) {
+      console.error("Price is required");
+      return false;
+    }
+
+    /* handle images later
+    if (productFormData.image === null) {
+      console.error("Image is required");
+      return false;
+    }
+    */
+
+    if (productFormData.condition === "") {
+      console.error("Condition is required");
+      return false;
+    }
+
+    return true;
+  }
+
   const handleSubmit = async (e:FormEvent<HTMLFormElement>) => {
     e.preventDefault();
+
+    if (!validate()) {
+      return;
+    }
 
     const productData = new FormData();
     productData.append("title", productFormData.title);

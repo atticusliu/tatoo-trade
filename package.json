@@ -6,6 +6,7 @@
     "start": "next start"
   },
   "dependencies": {
+    "@prisma/client": "^5.19.1",
     "@supabase/ssr": "latest",
     "@supabase/supabase-js": "latest",
     "geist": "^1.2.1",
