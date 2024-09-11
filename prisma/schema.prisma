@@ -19,7 +19,7 @@ model User {
   @@schema("auth")
 }
 
-model Product {
+model Products {
   id              Int         @id @default(autoincrement())
   createdAt       DateTime    @default(now())
   updatedAt       DateTime    @updatedAt
