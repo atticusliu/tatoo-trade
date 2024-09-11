@@ -2,12 +2,14 @@
 
 import { useState, ChangeEvent, FormEvent } from "react";
 import CreateProductButton from "@/components/CreateProductButton";
+import { formatCurrency } from "@/lib/formatters";
 
+/*
 interface ProductData {
   title: string;
   description: string;
   category: string;
-  price: number;
+  priceInCents: number;
   image: File | null;
   condition: string;
   status: string;
@@ -18,18 +20,23 @@ interface ProductData {
   sold_at?: string;
   updated_at?: string;
 }
+*/
 
 export default function CreateProduct() {
+  const [priceInCents, setPriceInCents] = useState<number>();
+
+  /*
   const [productFormData, setProductFormData] = useState<ProductData>({
     title: "",
     description: "",
     category: "",
-    price: 0.00,
+    priceInCents: 0,
     image: null,
     condition: "",
     status: "",
     created_at: new Date().toISOString(),
   });
+
 
   const handleChange = (e: ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement
     >) => {
@@ -67,17 +74,16 @@ export default function CreateProduct() {
       return false;
     }
 
-    if (productFormData.price === 0.00) {
+    if (productFormData.priceInCents === 0) {
       console.error("Price is required");
       return false;
     }
 
-    /* handle images later
+    // handle images later
     if (productFormData.image === null) {
       console.error("Image is required");
       return false;
     }
-    */
 
     if (productFormData.condition === "") {
       console.error("Condition is required");
@@ -98,7 +104,7 @@ export default function CreateProduct() {
     productData.append("title", productFormData.title);
     productData.append("description", productFormData.description);
     productData.append("category", productFormData.category);
-    productData.append("price", productFormData.price.toString());
+    productData.append("price", productFormData.priceInCents.toString());
     productData.append("image", productFormData.image as Blob);
     productData.append("condition", productFormData.condition);
     productData.append("status", productFormData.status);
@@ -119,7 +125,86 @@ export default function CreateProduct() {
       console.error("An error occurred:", error);
     }
   }
+  */
 
+  return (
+    <div className="container mx-auto w-1/2">
+      <h1 className="text-2xl pb-8">Create a Product</h1>
+
+      <form className="flex flex-col mx-auto">
+        <div className="flex flex-col pb-8">
+          <label htmlFor="title">Title</label>
+          <input
+            type="text"
+            id="title"
+            required
+          />
+        </div>
+
+        <div className="flex flex-col pb-8">
+          <label htmlFor="description">Description</label>
+          <textarea
+            id="description"
+          >
+          </textarea>
+        </div>
+
+        <div className="flex flex-col pb-8">
+          <label htmlFor="category">Category</label>
+          <select
+            id="category"
+            required
+          >
+            <option value="tattoo_machines">Tattoo Machines</option>
+            <option value="flash_material">Flash Material</option>
+            <option value="books">Books</option>
+            <option value="inks">Inks</option>
+            <option value="other">Other</option>
+          </select>
+        </div>
+
+        <div className="flex flex-col pb-8">
+          <label htmlFor="priceInCents">Price In Cents</label>
+          <input
+            type="number"
+            id="priceInCents"
+            onChange={e => setPriceInCents(Number(e.target.value) || undefined)}
+            placeholder="0"
+            required
+          />
+          <div className="text-muted-foreground">
+            {formatCurrency((priceInCents || 0) / 100)}
+          </div>
+        </div>
+
+        <div className="flex flex-col pb-8">
+          <label htmlFor="image">Image</label>
+          <input
+            type="file"
+            id="image"
+            required
+          />
+        </div>
+
+        <div className="flex flex-col pb-8">
+          <label htmlFor="condition">Condition</label>
+          <select
+            id="condition"
+            required
+          >
+            <option value="new">New</option>
+            <option value="like_new">Used - Like New</option>
+            <option value="good">Used - Good</option>
+            <option value="fair">Used - Fair</option>
+          </select>
+        </div>
+      </form>
+
+      <CreateProductButton />
+    </div>
+  );
+
+  /*
   return (
     <div className="container mx-auto w-1/2">
       <h1 className="text-2xl pb-8">Create a Product</h1>
@@ -162,15 +247,19 @@ export default function CreateProduct() {
         </div>
 
         <div className="flex flex-col pb-8">
-          <label htmlFor="price">Price</label>
+          <label htmlFor="priceInCents">Price In Cents</label>
           <input
-            type="currency"
-            id="price"
-            value={productFormData.price}
-            onChange={handleChange}
-            placeholder="0.00"
+            type="number"
+            id="priceInCents"
+            // value={productFormData.priceInCents}
+            value={priceInCents}
+            onChange={e => setPriceInCents(Number(e.target.value) || undefined)}
+            placeholder="0"
             required
           />
+          <div className="text-muted-foreground">
+            {formatCurrency((priceInCents || 0) / 100)}
+          </div>
         </div>
 
         <div className="flex flex-col pb-8">
@@ -202,4 +291,5 @@ export default function CreateProduct() {
       <CreateProductButton />
     </div>
   );
+  */
 }
