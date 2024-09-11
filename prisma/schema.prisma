@@ -1,39 +1,57 @@
 generator client {
-  provider = "prisma-client-js"
+  provider        = "prisma-client-js"
   previewFeatures = ["multiSchema"]
 }
 
 datasource db {
   provider = "postgresql"
   url      = env("DATABASE_URL")
-  schemas  = ["public", "auth"]
+  schemas  = ["public"]
 }
 
 model User {
-  id              Int         @id @default(autoincrement())
-  email           String      @unique
-  name            String?
-  productsSold    Product[]   @relation("Seller")
-  productsBought  Product[] @relation("Buyer")
+  id        Int       @id @default(autoincrement())
+  email     String    @unique
+  name      String?
+  purchases Order[]   @relation("Seller")
+  sales     Order[]   @relation("Buyer")
+  Order     Order[]
+  Product   Product[]
 
-  @@schema("auth")
+  @@schema("public")
 }
 
-model Products {
-  id              Int         @id @default(autoincrement())
-  createdAt       DateTime    @default(now())
-  updatedAt       DateTime    @updatedAt
-  title           String
-  description     String
-  price           Decimal     @db.Decimal(10, 2)
-  condition       String
-  seller          User        @relation("Seller", fields: [sellerId], references: [id])
-  sellerId        Int
-  soldAt          DateTime?
-  buyer           User?       @relation("Buyer", fields: [buyerId], references: [id])
-  buyerId         Int?
-  boughtAt        DateTime?
-  status          String
+model Order {
+  id               Int      @id @default(autoincrement())
+  pricePaidInCents Int
+  createdAt        DateTime @default(now())
+  updatedAt        DateTime @updatedAt
+  seller           User     @relation("Seller", fields: [sellerId], references: [id])
+  sellerId         Int
+  buyer            User?    @relation("Buyer", fields: [buyerId], references: [id])
+  buyerId          Int?
+  productId        Int
+  product          Product  @relation(fields: [productId], references: [id], onDelete: Restrict)
+  User             User?    @relation(fields: [userId], references: [id])
+  userId           Int?
+
+  @@schema("public")
+}
+
+model Product {
+  id                     Int      @id @default(autoincrement())
+  createdAt              DateTime @default(now())
+  updatedAt              DateTime @updatedAt
+  title                  String
+  description            String
+  priceInCents           Int
+  condition              String
+  imagePath              String
+  isAvailableForPurchase Boolean  @default(true)
+  status                 String
+  Order                  Order[]
+  User                   User?    @relation(fields: [userId], references: [id])
+  userId                 Int?
 
   @@schema("public")
 }
