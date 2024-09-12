@@ -1,8 +1,7 @@
 import { createClient } from "@/utils/supabase/server";
-import ConnectSupabaseSteps from "@/components/tutorial/ConnectSupabaseSteps";
-import SignUpUserSteps from "@/components/tutorial/SignUpUserSteps";
 import Header from "@/components/Header";
 import Link from "next/link";
+import { Button } from "@/components/ui/button";
 
 export default async function Index() {
   return (
@@ -20,9 +19,13 @@ export default async function Index() {
         </main>
       </div>
 
-      <Link href="/products/create" className="hover:text-gray-300">
+      {/* <Link href="/products/create" className="hover:text-gray-300">
         Sell
-      </Link>
+      </Link> */}
+
+      <Button asChild>
+        <Link href="/products/create">Sell Item</Link>
+      </Button>
     </div>
   );
 }

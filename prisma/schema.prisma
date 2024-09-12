@@ -47,7 +47,7 @@ model Product {
   priceInCents           Int
   condition              String
   imagePath              String
-  isAvailableForPurchase Boolean  @default(true)
+  isAvailableForPurchase Boolean? @default(false)
   status                 String
   Order                  Order[]
   User                   User?    @relation(fields: [userId], references: [id])

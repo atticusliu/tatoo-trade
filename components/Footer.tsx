@@ -2,7 +2,7 @@ import Link from 'next/link';
 
 export default function Footer() {
   return (
-    <footer className="flex justify-center items-center fixed bottom-0 left-0 w-full py-4 bg-white border-t border-gray-200">
+    <footer className="flex justify-center items-center bottom-0 left-0 w-full py-4 bg-white border-t border-gray-200">
       <div className="flex gap-x-6">
         <p>&copy; 2024 Tattoo Trade</p>
         <Link href="/terms-of-service" className="hover:text-gray-300">
