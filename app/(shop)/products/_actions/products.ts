@@ -4,6 +4,7 @@ import { z } from "zod";
 import { createClient } from '@/utils/supabase/server'
 import fs from "fs/promises";
 import { redirect } from "next/navigation";
+import { revalidatePath } from "next/cache"
 
 const categoryEnum = z.enum([
   "tattoo_machines",
@@ -40,7 +41,7 @@ const addSchema = z.object({
   priceInCents: z.coerce.number().int().min(0),
   condition: conditionEnum,
   // status: statusEnum,
-  isAvailableForPurchase: z.boolean(),
+  isAvailableForPurchase: z.coerce.boolean(),
   image: imageSchema.refine(file => file.size > 0, "Required"),
 });
 
@@ -67,10 +68,12 @@ export async function createProduct(prevState:unknown, formData: FormData) {
 
   console.log("we are here");
 
+  // TODO: actually handle the error maybe lol
   const { error } = await supabase
     .from("Product")
     .insert([
       {
+        updatedAt: new Date(),
         title: data.title,
         description: data.description,
         category: data.category,
@@ -82,5 +85,8 @@ export async function createProduct(prevState:unknown, formData: FormData) {
       },
     ]);
 
+
+  revalidatePath("/")
+  revalidatePath("/products")
   redirect("/products");
 }

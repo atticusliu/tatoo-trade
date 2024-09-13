@@ -46,6 +46,7 @@ model Product {
   description            String
   priceInCents           Int
   condition              String
+  category               String
   imagePath              String
   isAvailableForPurchase Boolean? @default(false)
   status                 String
