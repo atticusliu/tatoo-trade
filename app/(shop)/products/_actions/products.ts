@@ -103,7 +103,6 @@ export async function createProduct(prevState:unknown, formData: FormData) {
 
   if (error) {
     console.log(error);
-    return error;
   }
 
   revalidatePath("/")

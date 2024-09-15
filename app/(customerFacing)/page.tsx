@@ -4,8 +4,12 @@ import { ArrowRight } from "lucide-react";
 import Link from "next/link";
 import { Button } from "@/components/ui/button";
 import { cache } from "@/lib/cache";
+import { ProductCard, ProductCardSkeleton } from '@/components/ProductCard';
+import { Suspense } from 'react';
 
-const getNewestProducts = cache(async () => {
+// TODO: figure out this caching issue later
+// const getNewestProducts = cache(async () => {
+async function getNewestProducts() {
   const supabase = createClient();
   // fetch newest products where isAvailableForPurchase is true
   // but just get six of them
@@ -22,7 +26,7 @@ const getNewestProducts = cache(async () => {
   }
 
   return data;
-}, ["/", "getNewestProducts"]);
+}//, ["/", "getNewestProducts"]);
 
 export default function HomePage() {
   return (
@@ -68,8 +72,29 @@ function ProductGridSection({
           </Link>
         </Button>
       </div>
-      
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+        <Suspense
+          fallback={
+            <>
+              <ProductCardSkeleton />
+              <ProductCardSkeleton />
+              <ProductCardSkeleton />
+            </>
+          }
+        >
+          <ProductSuspense productsFetcher={productsFetcher} />
+        </Suspense>
+      </div>
     </div>
   );
 }
 
+async function ProductSuspense({
+  productsFetcher,
+}: {
+  productsFetcher: () => Promise<Product[]>
+}) {
+  return (await productsFetcher()).map(product => (
+    <ProductCard key={product.id} {...product} />
+  ))
+}
