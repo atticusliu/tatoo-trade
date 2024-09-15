@@ -103,9 +103,8 @@ export async function createProduct(prevState:unknown, formData: FormData) {
     return error;
   }
 
-
   revalidatePath("/")
-  revalidatePath("/profile")
+  revalidatePath("/products")
   redirect("/profile");
 }
 
@@ -150,8 +149,10 @@ export async function updateProduct(id: string, prevState: unknown, formData: Fo
     })
     .match({ id });
 
-  revalidatePath("/")
-  revalidatePath("/profile")
+  revalidatePath("/");
+  revalidatePath("/products");
+  // probably don't need to revalidate /profile
+  revalidatePath("/profile");
   redirect("/profile");
 }
 

@@ -3,9 +3,9 @@ import { Product } from "@prisma/client"
 import { ArrowRight } from "lucide-react";
 import Link from "next/link";
 import { Button } from "@/components/ui/button";
-import { ProductCard } from "@/components/ProductCard";
+import { cache } from "@/lib/cache";
 
-async function getNewestProducts() {
+const getNewestProducts = cache(async () => {
   const supabase = createClient();
   // fetch newest products where isAvailableForPurchase is true
   // but just get six of them
@@ -17,13 +17,12 @@ async function getNewestProducts() {
     .order("createdAt", { ascending: false });
 
   if (error) {
-    console.log("ERROR", error);
     console.error(error);
     return [];
   }
 
   return data;
-}
+}, ["/", "getNewestProducts"]);
 
 export default function HomePage() {
   return (
@@ -55,7 +54,7 @@ type ProductGridSectionProps = {
   productsFetcher: () => Promise<Product[]>;
 }
 
-async function ProductGridSection({
+function ProductGridSection({
   productsFetcher, title
 }: ProductGridSectionProps) {
   return (
@@ -69,11 +68,8 @@ async function ProductGridSection({
           </Link>
         </Button>
       </div>
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
-        {(await productsFetcher()).map(product => (
-          <ProductCard key={product.id} {...product} />
-        ))}
-      </div>
+      
     </div>
   );
 }
+
