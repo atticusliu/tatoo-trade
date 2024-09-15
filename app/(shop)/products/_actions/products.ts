@@ -56,9 +56,15 @@ const editSchema = z.object({
 });
 
 export async function createProduct(prevState:unknown, formData: FormData) {
-  const result = addSchema.safeParse(Object.fromEntries(formData.entries()));
+  const formDataCopy = Object.fromEntries(formData.entries());
+  const product = {
+    id: crypto.randomUUID(),
+    ...formDataCopy,
+  }
+  const result = addSchema.safeParse(product);
 
   if (!result.success) {
+    console.log(result.error);
     return result.error.formErrors.fieldErrors;
   }
 
@@ -75,11 +81,11 @@ export async function createProduct(prevState:unknown, formData: FormData) {
     Buffer.from(await data.image.arrayBuffer())
   );
 
-  // TODO: actually handle the error maybe lol
   const { error } = await supabase
     .from("Product")
     .insert([
       {
+        id: product.id,
         updatedAt: new Date(),
         title: data.title,
         description: data.description,
@@ -91,6 +97,11 @@ export async function createProduct(prevState:unknown, formData: FormData) {
         imagePath,
       },
     ]);
+
+  if (error) {
+    console.log(error);
+    return error;
+  }
 
 
   revalidatePath("/")
