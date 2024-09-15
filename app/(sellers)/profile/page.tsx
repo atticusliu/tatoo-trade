@@ -12,12 +12,14 @@ export default async function ProfilePage() {
     data: { user },
   } = await supabase.auth.getUser();
 
+  const greetingName = user ? user.email : "there";
+
   // my styling is all over the place but that's fine for now
   return (
     <div>
       <div>
         <h1>Profile Page</h1>
-        <p>Hello, {user.email}</p>
+        <p>Hello, {greetingName}</p>
       </div>
       <ProductsTable />
     </div>
