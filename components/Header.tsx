@@ -11,12 +11,7 @@ export default function Header() {
           <Image src='/tatttootrade_logo-01.png' width={125} height={25} alt='Go to the homepage' />
         </Link>
         <nav className="flex items-center">
-          <ul className="flex gap-x-6">
-            <li>
-              <Link href="/about" className="hover:text-gray-300">
-                About
-              </Link>
-            </li>
+          <ul className="flex items-center gap-4">
             <li>
               <AuthButton />
             </li>

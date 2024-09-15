@@ -39,3 +39,6 @@ next-env.d.ts
 
 # root certificate
 /prod-ca-2021.crt
+
+# images
+/public/products
