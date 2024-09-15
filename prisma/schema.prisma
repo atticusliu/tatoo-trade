@@ -49,7 +49,7 @@ model Product {
   category               String
   imagePath              String
   isAvailableForPurchase Boolean? @default(false)
-  status                 String
+  // status                 String
   Order                  Order[]
 
   userId String?

@@ -5,6 +5,7 @@ import { createClient } from '@/utils/supabase/server'
 import fs from "fs/promises";
 import { notFound, redirect } from "next/navigation";
 import { revalidatePath } from "next/cache"
+import { getCurrentUserID } from "@/lib/sessionHelpers";
 
 const categoryEnum = z.enum([
   "tattoo_machines",
@@ -81,6 +82,8 @@ export async function createProduct(prevState:unknown, formData: FormData) {
     Buffer.from(await data.image.arrayBuffer())
   );
 
+  const userID = await getCurrentUserID();
+
   const { error } = await supabase
     .from("Product")
     .insert([
@@ -92,9 +95,9 @@ export async function createProduct(prevState:unknown, formData: FormData) {
         category: data.category,
         priceInCents: data.priceInCents,
         condition: data.condition,
-        status: "available",
         isAvailableForPurchase: false,
         imagePath,
+        userId: userID,
       },
     ]);
 
