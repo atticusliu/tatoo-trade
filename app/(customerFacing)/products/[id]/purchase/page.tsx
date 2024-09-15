@@ -2,9 +2,6 @@ import NotFound from "@/app/(shop)/not-found/page";
 import { createClient } from "@/utils/supabase/server";
 import Stripe from "stripe";
 
-const stripe = new Stripe(process.env.STRIPE_SECRET_KEY, {
-  // apiVersion: "2020-08-27",
-});
 
 export default async function PurchasePage({
   params: { id },
