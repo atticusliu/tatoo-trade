@@ -3,6 +3,8 @@ import { headers } from "next/headers";
 import { createClient } from "@/utils/supabase/server";
 import { redirect } from "next/navigation";
 import { SubmitButton } from "./submit-button";
+import { SupabaseClient } from "@supabase/supabase-js";
+import { createStripeConnectedAccount } from "../stripe/actions";
 
 export default function Login({
   searchParams,
@@ -45,13 +47,14 @@ export default function Login({
     });
 
     if (error) {
+      console.log(error);
       return redirect("/login?message=Could not authenticate user");
     }
 
-    // insert into public users table
-    const { error: insertError } = await supabase
-      .from("User")
-      .insert([{ id: data.user?.id, email }]);
+    const authUserId = data?.user?.id || "";
+
+    await insertIntoUsersTable(authUserId, email);
+    await createStripeConnectedAccount(authUserId, email);
 
     return redirect("/login?message=Check email to continue sign in process");
   };
@@ -100,4 +103,24 @@ export default function Login({
       </form>
     </div>
   );
+}
+
+async function insertIntoUsersTable(
+  authUserId: string,
+  email: string
+  ) {
+  const supabase = createClient();
+  const id = crypto.randomUUID();
+
+  // insert into public users table
+  const { error } = await supabase.from("User").insert([
+    {
+      id,
+      email,
+      authUserId,
+    },
+  ]);
+  if (error) {
+    console.error(error);
+  }
 }

@@ -10,13 +10,17 @@ datasource db {
 }
 
 model User {
-  id        String    @id @default(uuid())
-  email     String    @unique
-  name      String?
-  purchases Order[]   @relation("Seller")
-  sales     Order[]   @relation("Buyer")
-  Order     Order[]
-  Product   Product[]
+  id                       String    @id @default(uuid())
+  createdAt                DateTime  @default(now())
+  updatedAt                DateTime  @updatedAt
+  authUserId               String
+  email                    String    @unique
+  name                     String?
+  stripeConnectedAccountId String?
+  purchases                Order[]   @relation("Seller")
+  sales                    Order[]   @relation("Buyer")
+  Order                    Order[]
+  Product                  Product[]
 
   @@schema("public")
 }

@@ -16,23 +16,20 @@ export function ProductCard( { id, title, priceInCents, description, imagePath }
   : ProductCardProps) {
   return (
   <Card className="flex flex-col overflow-hidden">
-    <div className="relative w-full h-auto aspect-video">
-      <Image src={imagePath} alt={title} fill />
-    </div>
+    <Link href={{
+      pathname: `/products/${id}`,
+      query: { id }
+      }}
+      passHref
+      >
+      <div className="relative w-full h-auto aspect-video">
+        <Image src={imagePath} alt={title} fill />
+      </div>
+    </Link>
     <CardHeader>
       <CardTitle>{title}</CardTitle>
       <CardDescription>{formatCurrency(priceInCents / 100)}</CardDescription>
     </CardHeader>
-    <CardContent className="flex-grow">
-      <p className="line-clamp-4">{description}</p>
-    </CardContent>
-    <CardFooter>
-      <Button asChild size="lg" className="w-full">
-        <Link href={`/products/${id}/purchase`}>
-          Purchase
-        </Link>
-      </Button>
-    </CardFooter>
   </Card>
   )
 }

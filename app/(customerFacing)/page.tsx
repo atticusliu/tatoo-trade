@@ -6,6 +6,7 @@ import { Button } from "@/components/ui/button";
 import { cache } from "@/lib/cache";
 import { ProductCard, ProductCardSkeleton } from '@/components/ProductCard';
 import { Suspense } from 'react';
+import { HomepageHeroes } from "@/app/(customerFacing)/_components/HomepageHeroes";
 
 // TODO: figure out this caching issue later
 // const getNewestProducts = cache(async () => {
@@ -31,6 +32,7 @@ async function getNewestProducts() {
 export default function HomePage() {
   return (
   <main className="space-y-12">
+    <HomepageHeroes />
     <ProductGridSection
       title="Newest Products"
       productsFetcher={getNewestProducts}

@@ -2,6 +2,7 @@ import { createClient } from "@/utils/supabase/server"
 import { Suspense } from 'react';
 import { ProductCard, ProductCardSkeleton } from '@/components/ProductCard';
 import { cache } from "@/lib/cache";
+import { PageHeader } from "@/components/PageHeader";
 
 /* TODO: figure out this caching issue later
    At the moment I'm seeing this error:
@@ -28,7 +29,9 @@ async function getProducts() {
 
 export default function ProductsPage() {
   return (
-    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+    <div>
+      <PageHeader>Products</PageHeader>
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
         <Suspense fallback={
           <>
             <ProductCardSkeleton />
@@ -42,6 +45,7 @@ export default function ProductsPage() {
           <ProductsSuspense />
         </Suspense>
       </div>
+    </div>
   );
 }
 
