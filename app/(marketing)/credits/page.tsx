@@ -1,7 +1,9 @@
+import { PageHeader } from '@/components/PageHeader';
+
 export default async function Credits() {
   return (
     <div>
-      <p className="text-4xl">Credits</p>
+      <PageHeader>Credits</PageHeader>
       <br />
       <p>Thank you to the following people for the assets used on Tattoo Trade:</p>
       <ul className="list-disc ml-5">

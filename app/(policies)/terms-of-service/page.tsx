@@ -1,7 +1,9 @@
+import { PageHeader } from '@/components/PageHeader';
+
 export default function TermsOfService() {
   return (
     <div>
-      <p className="text-4xl">Terms of Service</p>
+      <PageHeader>Terms of Service</PageHeader>
       <br />
       <p className="text-xl">Last updated: September 16, 2024</p>
       <br />

@@ -1,3 +1,4 @@
+import { PageHeader } from '@/components/PageHeader';
 import { Metadata } from "next"
 import Link from "next/link"
 
@@ -9,7 +10,7 @@ export const metadata: Metadata = {
 export default function NotFound() {
   return (
     <div>
-      <p className="text-4xl">Page Not Found</p>
+      <PageHeader>Page Not Found</PageHeader>
       <br />
       <p>Sorry, the page you tried to access does not exist.</p>
       <Link href="/">Go back home</Link>

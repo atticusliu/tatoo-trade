@@ -1,7 +1,9 @@
+import { PageHeader } from '@/components/PageHeader';
+
 export default function PrivacyPolicy() {
   return (
     <div>
-      <p className="text-4xl">Privacy Policy</p>
+      <PageHeader>Privacy Policy</PageHeader>
       <br />
       <p className="text-xl">Last updated: September 16, 2024</p>
       <br/>

@@ -1,7 +1,9 @@
+import { PageHeader } from '@/components/PageHeader';
+
 export default async function ProductPage() {
   return (
     <div>
-      <p className="text-4xl">Individal Product Page</p>
+      <PageHeader>Individal Product Page</PageHeader>
       <br />
     </div>
   );

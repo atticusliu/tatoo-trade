@@ -1,3 +1,4 @@
+import { PageHeader } from '@/components/PageHeader';
 import { formatCurrency } from "@/lib/formatters";
 import { createClient } from "@/utils/supabase/server";
 import { Table, TableHeader, TableRow, TableHead, TableBody, TableCell } from "@/components/ui/table";
@@ -18,7 +19,7 @@ export default async function ProfilePage() {
   return (
     <div>
       <div>
-        <p className="text-4xl">Profile Page</p>
+        <PageHeader>Profile Page</PageHeader>
         <br />
         <p>Hello, {greetingName}</p>
       </div>

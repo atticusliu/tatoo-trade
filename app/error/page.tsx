@@ -1,7 +1,9 @@
+import { PageHeader } from '@/components/PageHeader';
+
 export default function ErrorPage() {
   return (
     <div>
-      <p className="text-4xl">Something went wrong</p>
+      <PageHeader>Something went wrong</PageHeader>
       <br />
       <p>Sorry, something went wrong. Please try again later.</p>
     </div>

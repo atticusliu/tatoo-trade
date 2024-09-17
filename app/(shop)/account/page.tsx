@@ -1,7 +1,9 @@
+import { PageHeader } from '@/components/PageHeader';
+
 export default function Account() {
   return (
     <div>
-      <p className="text-4xl">Account</p>
+      <PageHeader>Account</PageHeader>
       <br />
       <p>This is the Account page</p>
     </div>
