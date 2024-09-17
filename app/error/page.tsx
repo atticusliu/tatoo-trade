@@ -1,7 +1,8 @@
 export default function ErrorPage() {
   return (
     <div>
-      <h1>Something went wrong</h1>
+      <p className="text-4xl">Something went wrong</p>
+      <br />
       <p>Sorry, something went wrong. Please try again later.</p>
     </div>
   );

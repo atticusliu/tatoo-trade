@@ -1,7 +1,8 @@
 export default async function ProductPage() {
   return (
     <div>
-      <h1>Individal Product Page</h1>
+      <p className="text-4xl">Individal Product Page</p>
+      <br />
     </div>
   );
 }

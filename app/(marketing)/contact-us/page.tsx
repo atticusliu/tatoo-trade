@@ -1,8 +1,9 @@
 export default function ContactUs() {
   return (
     <div>
-      <h1>Contact Us</h1>
-      <p>This is the Contact Us page</p>
+      <p className="text-4xl">Contact Us</p>
+      <br />
+      <p>For support and/or feedback, please email us at <a href="mailto:hello@tattoo-trade.com" className="text-blue-500">hello@tattoo-trade.com</a></p>
     </div>
   );
 }

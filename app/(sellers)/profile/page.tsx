@@ -18,7 +18,8 @@ export default async function ProfilePage() {
   return (
     <div>
       <div>
-        <h1>Profile Page</h1>
+        <p className="text-4xl">Profile Page</p>
+        <br />
         <p>Hello, {greetingName}</p>
       </div>
       <ProductsTable />

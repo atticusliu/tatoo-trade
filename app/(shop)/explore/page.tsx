@@ -1,7 +1,8 @@
 export default function Explore() {
   return (
     <div>
-      <h1>Explore</h1>
+      <p className="text-4xl">Explore</p>
+      <br />
       <p>This is the Explore page</p>
     </div>
   );

@@ -9,7 +9,8 @@ export const metadata: Metadata = {
 export default function NotFound() {
   return (
     <div>
-      <h1>Page Not Found</h1>
+      <p className="text-4xl">Page Not Found</p>
+      <br />
       <p>Sorry, the page you tried to access does not exist.</p>
       <Link href="/">Go back home</Link>
     </div>

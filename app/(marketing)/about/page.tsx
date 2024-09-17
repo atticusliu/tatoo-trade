@@ -1,8 +1,10 @@
 export default function About() {
   return (
     <div>
-      <h1>About</h1>
-      <p>This is the about page</p>
+      <p className="text-4xl">About</p>
+      <br />
+      <p>Tattoo Trade is a marketplace dedicated to all things related in the tattoo business.</p>
+      <p>Buy and sell your equipment, material, or anything else with us.</p>
     </div>
   );
 }

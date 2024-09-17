@@ -1,8 +1,9 @@
 export default function AdminDashboard() {
   return (
     <div>
-      <h1>Admin Dashboard</h1>
-      <p>This is the Admin Dashboard page (secure this route)</p>
+      <p className="text-4xl">Admin Dashboard</p>
+      <br />
+      <p>This is the secured Admin Dashboard page</p>
     </div>
   );
 }
